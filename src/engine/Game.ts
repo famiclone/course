@@ -52,7 +52,8 @@ export default class Game implements GameProps {
   }
 
   init(cb: (time: number) => void) {
-    AssetLoader.load(['images/tileset.png'])
+    const al = new AssetLoader();
+    al.load(['images/tileset.png'])
       // @ts-ignore
       .then((assets: AssetLoader) => this.setup(assets.list, cb));
   }

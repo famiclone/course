@@ -12,7 +12,7 @@ export class AssetLoader {
     this.list = [];
   }
 
-  static load(assets: string[]) {
+  load(assets: string[]) {
     const imageExt = ['png'];
     const jsonExt = ['json'];
     const configExt = ['toml'];
@@ -23,7 +23,7 @@ export class AssetLoader {
         const extension = asset.split('.').pop() || '';
 
         if (imageExt.includes(extension)) {
-          AssetLoader.loadImage(asset, resolve);
+          this.loadImage(asset, resolve);
         } else if (jsonExt.includes(extension)) {
           this.loadJson(asset, resolve);
         } else if (configExt.includes(extension)) {
@@ -43,14 +43,14 @@ export class AssetLoader {
     }
   }
 
-  static loadImage(src: string, resolve) {
+  loadImage(src: string, resolve) {
     const image = new Image();
     image.src = src;
 
     image.addEventListener(
       'load',
       () => {
-        AssetLoader.loadHandler(resolve);
+        this.loadHandler(resolve);
       },
       false,
     );
